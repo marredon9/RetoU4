@@ -16,8 +16,17 @@ public class Reserva {
 		this.fecha = fecha;
 	}
 	
-	static void crearReserva(Usuario usuario, Libro libro)
+	static void crearReserva(Usuario usuario, Libro libro, String fecha)
 	{
-		
+		for (int i = 0; i < reservas.length; i++)
+		{
+			if (reservas[i] == null)
+			{
+				reservas[i] = new Reserva(usuario, libro, fecha);
+				System.out.println("Se ha creado una reserva en la posición nº " + i);
+				return;
+			}
+		}
+		System.out.println("ERROR: La lista de reservas está llena. No se ha podido registrar la reserva.");
 	}
 }
