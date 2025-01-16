@@ -61,11 +61,12 @@ public class Reserva {
 			}
 			else
 			{
-				reservas[i] = reservas[i + 1].clone();
+				reservas[i] = reservas[i + 1];
 			}
 		}
 		
 		System.out.println("Se ha liberado la reserva nº " + id + "!");
 		
 	}
+	
 }
