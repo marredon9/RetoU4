@@ -6,4 +6,12 @@ public class Reserva {
 	Usuario usuario;
 	Libro libro;
 	String fecha;
+	
+	Reserva(Usuario usuario, Libro libro, String fecha)
+	{
+		this.id = numero_reserva;
+		numero_reserva++;
+		this.libro = libro;
+		this.fecha = fecha;
+	}
 }
