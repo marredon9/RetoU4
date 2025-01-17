@@ -20,7 +20,7 @@ public class Usuario {
 	}
 	
 	public static void registrarUsuario(String nombre, String idUnico, String rol) {
-		if (usuarios[usuarios.length + 1] != null)
+		if (usuarios[usuarios.length - 1] != null)
 		{
 			System.out.println("Se ha alcanzado el límite de usuarios a registrar."); //Si el último usuario en la lista no es nulo, no hay huecos libres.
 			return;
@@ -61,31 +61,8 @@ public class Usuario {
 		 }
 	}
 	
-	public boolean verificarPrestamo(Prestamo[] prestamos) {
-		int limitePrestamos = 0;
-
-		switch (rol.toLowerCase()) {
-		case "estudiante":
-			limitePrestamos = 3;
-			break;
-		case "profesor":
-			limitePrestamos = 5;
-			break;
-		case "invitado":
-			limitePrestamos = 1;
-			break;
-		default:
-			System.out.println("Rol no valido");
-			return false;
-		}
-
-		int prestamosActuales = 0;
-		for(Prestamo prestamo : prestamos){
-			if(prestamo.getUsuario().equals(this)){
-				prestamosActuales++;
-			}
-		}
-		return prestamosActuales < limitePrestamos;
+	public boolean verificarPrestamo() {
+		return (this.librosPrestados[this.librosPrestados.length - 1] != null);
 	}
 }
 
