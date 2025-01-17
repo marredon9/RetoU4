@@ -16,3 +16,28 @@ public Prestamo(String idPrestamo, Libro libro, Usuario usuario, LocalDate fecha
         this.libro.setDisponible(false);
     }
 }
+
+public String getIdPrestamo() {
+        return idPrestamo;
+    }
+
+    public Libro getLibro() {
+        return libro;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public LocalDate getFechaPrestamo() {
+        return fechaPrestamo;
+    }
+
+    public LocalDate getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    public void marcarDevolucion() {
+        this.libro.setDisponible(true);
+    }
+}
