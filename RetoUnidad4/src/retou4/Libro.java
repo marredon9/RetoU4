@@ -70,4 +70,22 @@ public class Libro {
             return false;
         }
     }
+    public static Libro consultarLibroPorId(int id) {
+        for (int i = 0; i < cantidadLibros; i++) {
+            if (libros[i].getId() == id) {
+                return libros[i];
+            }
+        }
+        return null; 
+    }
+
+    public static Libro consultarLibroPorTitulo(String titulo) {
+        for (int i = 0; i < cantidadLibros; i++) {
+            if (libros[i].getTitulo().equalsIgnoreCase(titulo)) {
+                return libros[i];
+            }
+        }
+        return null; 
+    }
+
 }
