@@ -69,4 +69,18 @@ public class Reserva {
 		
 	}
 	
+	static int contarReservas(Libro libro)
+	{
+		int cuentaReservas = 0;
+		for (int i = 0; i < reservas.length; i++)
+		{
+			if (reservas[i] == null) break;
+			if (reservas[i].libro.equals(libro))
+			{
+				cuentaReservas++;
+			}
+		}
+		return cuentaReservas;
+	}
+	
 }
