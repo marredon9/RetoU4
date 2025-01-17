@@ -11,3 +11,8 @@ public class SistemaBiblioteca {
 
         biblioteca.realizarPrestamo("P1", "1", "U1");
         biblioteca.realizarPrestamo("P2", "2", "U1");
+
+        biblioteca.registrarDevolucion("1");
+    }
+}
+
