@@ -38,6 +38,11 @@ public class Libro {
     	return 0; //Provisional
     }
     
+    boolean equals(Libro libro)
+    {
+    	return (this.id == libro.id);
+    }
+    
     @Override
     public String toString() {
         return "ID: " + this.id + ", Título: " + this.titulo + ", Autor: " + this.autor + ", Año: " + this.añoPublicacion + ", Cantidad: " + cantidad + ", Reservas: " + this.contarReservas();
