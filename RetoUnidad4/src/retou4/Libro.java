@@ -10,7 +10,7 @@ public class Libro {
     String[] reservas; 
     int cantidad;
     static Libro[] libros = new Libro[10]; 
-    static int cantidadLibros = 0; 
+    //static int cantidadLibros = 0; 
 
     // Constructor
     public Libro(int id, String titulo, String autor, int añoPublicacion, int cantidad) {
@@ -22,48 +22,30 @@ public class Libro {
         this.reservas = new String[cantidad];  
         
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public int getAñoPublicacion() {
-        return añoPublicacion;
-    }
-
-    public int getCantidad() {
-        return cantidad;
+    
+    static int contarLibros()
+    {
+    	int cuenta = 0;
+    	for (cuenta = 0; cuenta < libros.length; cuenta++)
+    	{
+    		if (libros[cuenta] == null) break;
+    	}
+    	return cuenta;
     }
     
-    public String[] getReservas() {
-        return reservas;
+    int contarReservas()
+    {
+    	return 0; //Provisional
     }
     
     @Override
     public String toString() {
-        return "ID: " + id + ", Título: " + titulo + ", Autor: " + autor + ", Año: " + añoPublicacion + ", Cantidad: " + cantidad + ", Reservas: " + getCantidadReservas();
-    }
-
-    public int getCantidadReservas() {
-        int count = 0;
-        for (String reserva : reservas) {
-            if (reserva != null) {
-                count++;
-            }
-        }
-        return count;
+        return "ID: " + this.id + ", Título: " + this.titulo + ", Autor: " + this.autor + ", Año: " + this.añoPublicacion + ", Cantidad: " + cantidad + ", Reservas: " + this.contarReservas();
     }
     
     public static boolean registrarLibro(int id, String titulo, String autor, int añoPublicacion, int cantidad) {
-        if (cantidadLibros < libros.length) {
+        int cantidadLibros = Libro.contarLibros();
+    	if (cantidadLibros < libros.length) {
             libros[cantidadLibros] = new Libro(id, titulo, autor, añoPublicacion, cantidad);
             cantidadLibros++;
             return true;
@@ -74,8 +56,9 @@ public class Libro {
     }
     
     public static Libro consultarLibroPorId(int id) {
-        for (int i = 0; i < cantidadLibros; i++) {
-            if (libros[i].getId() == id) {
+        int cantidadLibros = Libro.contarLibros();
+    	for (int i = 0; i < cantidadLibros; i++) {
+            if (libros[i].id == id) {
                 return libros[i];
             }
         }
@@ -83,8 +66,9 @@ public class Libro {
     }
 
     public static Libro consultarLibroPorTitulo(String titulo) {
-        for (int i = 0; i < cantidadLibros; i++) {
-            if (libros[i].getTitulo().equalsIgnoreCase(titulo)) {
+    	int cantidadLibros = Libro.contarLibros();
+    	for (int i = 0; i < cantidadLibros; i++) {
+            if (libros[i].titulo.equalsIgnoreCase(titulo)) {
                 return libros[i];
             }
         }
@@ -92,7 +76,8 @@ public class Libro {
     }
     
     public static void mostrarLibros() {
-        if (cantidadLibros == 0) {
+    	int cantidadLibros = Libro.contarLibros();
+    	if (cantidadLibros == 0) {
             System.out.println("No hay libros registrados.");
         } else {
             for (int i = 0; i < cantidadLibros; i++) {
@@ -125,7 +110,7 @@ public class Libro {
         return false;
     }
     
-    public static int obtenerNumero(java.util.Scanner scanner, String mensaje) {
+    public static int obtenerNumero(Scanner scanner, String mensaje) {
         int numero;
         while (true) {
             System.out.print(mensaje);
@@ -140,7 +125,7 @@ public class Libro {
         }
     }
 
-    public static String obtenerTexto(java.util.Scanner scanner, String mensaje) {
+    public static String obtenerTexto(Scanner scanner, String mensaje) {
         System.out.print(mensaje);
         return scanner.nextLine();
     }
