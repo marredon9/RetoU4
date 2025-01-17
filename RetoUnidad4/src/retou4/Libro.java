@@ -1,13 +1,11 @@
 package retou4;
 
-import java.util.Scanner;
-
 public class Libro {
     int id;
     String titulo;
     String autor;
     int añoPublicacion;
-    String[] reservas; 
+    //String[] reservas; 
     int cantidad;
     static Libro[] libros = new Libro[10]; 
     //static int cantidadLibros = 0; 
@@ -19,7 +17,7 @@ public class Libro {
         this.autor = autor;
         this.añoPublicacion = añoPublicacion;
         this.cantidad = cantidad;
-        this.reservas = new String[cantidad];  
+        //this.reservas = new String[cantidad];  
         
     }
     
@@ -52,7 +50,6 @@ public class Libro {
         int cantidadLibros = Libro.contarLibros();
     	if (cantidadLibros < libros.length) {
             libros[cantidadLibros] = new Libro(id, titulo, autor, añoPublicacion, cantidad);
-            cantidadLibros++;
             return true;
         } else {
             System.out.println("No hay espacio para más libros.");
@@ -73,7 +70,7 @@ public class Libro {
     public static Libro consultarLibroPorTitulo(String titulo) {
     	int cantidadLibros = Libro.contarLibros();
     	for (int i = 0; i < cantidadLibros; i++) {
-            if (libros[i].titulo.equalsIgnoreCase(titulo)) {
+            if (libros[i].titulo.toLowerCase().contains(titulo.toLowerCase())) {
                 return libros[i];
             }
         }

@@ -52,7 +52,7 @@ public class Principal {
         
     }
 
-    private static void registrarLibro(Scanner scanner) {
+    /*private static void registrarLibro(Scanner scanner) {
         int id = Libro.obtenerNumero(scanner, "Ingrese el ID del libro: ");
         String titulo = Libro.obtenerTexto(scanner, "Ingrese el título del libro: ");
         String autor = Libro.obtenerTexto(scanner, "Ingrese el autor del libro: ");
@@ -111,7 +111,7 @@ public class Principal {
         } else {
             System.out.println("Libro no encontrado.");
         }
-    }
+    }*/
     
     static int getInt(Scanner sc, String prompt)
     {
