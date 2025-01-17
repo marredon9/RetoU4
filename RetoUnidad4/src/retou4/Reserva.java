@@ -65,7 +65,7 @@ public class Reserva {
 			}
 		}
 		
-		System.out.println("Se ha liberado la reserva nº " + id + "!");
+		System.out.println("Se ha liberado la reserva " + id + ".");
 		
 	}
 	
@@ -81,6 +81,21 @@ public class Reserva {
 			}
 		}
 		return cuentaReservas;
+	}
+	
+	static void listarReservas()
+	{
+		for (int i = 0; i < reservas.length; i++)
+		{
+			if (reservas[i] == null) return;
+			System.out.println(reservas[i].toString());
+		}
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "ID: " + this.id + " Título: " + this.libro.titulo + " Usuario: " + this.usuario.nombre + " Fecha: " + this.fecha;
 	}
 	
 }

@@ -31,7 +31,7 @@ public class Prestamo {
 		libro.cantidad--;
 	}
 	
-	void finalizarPrestmo(String fechaFinal) {
+	void finalizarPrestamo(String fechaFinal) {
 	    /*if (!devuelto) {
 	        this.fechaDevolucion = LocalDate.now();
 	        this.devuelto = true;
