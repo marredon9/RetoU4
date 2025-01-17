@@ -3,7 +3,7 @@ package retou4;
 //import java.util.*;
 
 public class Usuario {
-	static int cont_ids;
+	static int cont_ids = 1;
 	String nombre;
 	int idUnico;
 	String rol;
@@ -55,10 +55,18 @@ public class Usuario {
 		
 	}
 	
-	public void listarUsuario(Usuario[] usuarios) {
+	public static void listarUsuario() {
 		//System.out.println("------Usuarios Registrados:------");
-		 for (Usuario usuario : usuarios) {
-			 System.out.println("Nombre: " + usuario.nombre + "\n" + " ID: " + usuario.idUnico + "\n"  + "Rol: " + usuario.rol);
+		 for (int i = 0; i < usuarios.length; i++)
+		 {
+			 if (usuarios[i] == null) return;
+			 //contar prestamos disponibles
+			 int prestamosDisponibles = 0;
+			 for (int j = 0; j < usuarios[i].librosPrestados.length; j++)
+			 {
+				 if (usuarios[i].librosPrestados[j] == null) prestamosDisponibles++;
+			 }
+			 System.out.println("Nombre: " + usuarios[i].nombre + ", ID: " + usuarios[i].idUnico + ", Rol: " + usuarios[i].rol + ", Préstamos disponibles: " + prestamosDisponibles);
 		 }
 	}
 	
@@ -66,4 +74,3 @@ public class Usuario {
 		return (this.librosPrestados[this.librosPrestados.length - 1] != null);
 	}
 }
-
