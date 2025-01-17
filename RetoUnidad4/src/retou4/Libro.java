@@ -5,6 +5,7 @@ public class Libro {
     private String titulo;
     private String autor;
     private int añoPublicacion;
+    private String[] reservas; 
     private int cantidad;
     private static Libro[] libros = new Libro[10]; 
     private static int cantidadLibros = 0; 
@@ -16,6 +17,8 @@ public class Libro {
         this.autor = autor;
         this.añoPublicacion = añoPublicacion;
         this.cantidad = cantidad;
+        this.reservas = new String[cantidad];  
+        
     }
 
     public int getId() {
@@ -36,5 +39,24 @@ public class Libro {
 
     public int getCantidad() {
         return cantidad;
+    }
+    
+    public String[] getReservas() {
+        return reservas;
+    }
+    
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Título: " + titulo + ", Autor: " + autor + ", Año: " + añoPublicacion + ", Cantidad: " + cantidad + ", Reservas: " + getCantidadReservas();
+    }
+
+    public int getCantidadReservas() {
+        int count = 0;
+        for (String reserva : reservas) {
+            if (reserva != null) {
+                count++;
+            }
+        }
+        return count;
     }
 }
