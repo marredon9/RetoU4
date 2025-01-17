@@ -5,21 +5,21 @@ package retou4;
 public class Usuario {
 	static int cont_ids;
 	String nombre;
-	String idUnico;
+	int idUnico;
 	String rol;
 	//List<String> librosPrestados;
 	Prestamo[] librosPrestados;
 	static Usuario[] usuarios = new Usuario[16];
 	
 	
-	public Usuario (String nombre, String idUnico, String rol, int prestamos) {
+	public Usuario (String nombre, int idUnico, String rol, int prestamos) {
 		this.nombre = nombre;
 		this.idUnico = idUnico;
 		this.rol = rol;
 		this.librosPrestados = new Prestamo[prestamos];
 	}
 	
-	public static void registrarUsuario(String nombre, String idUnico, String rol) {
+	public static void registrarUsuario(String nombre, String rol) {
 		if (usuarios[usuarios.length - 1] != null)
 		{
 			System.out.println("Se ha alcanzado el límite de usuarios a registrar."); //Si el último usuario en la lista no es nulo, no hay huecos libres.
@@ -47,7 +47,8 @@ public class Usuario {
 		{
 			if (usuarios[i] == null)
 			{
-				usuarios[i] = new Usuario(nombre, idUnico, rol, prestamos);
+				usuarios[i] = new Usuario(nombre, cont_ids, rol, prestamos);
+				cont_ids++;
 				break;
 			}
 		}
@@ -55,7 +56,7 @@ public class Usuario {
 	}
 	
 	public void listarUsuario(Usuario[] usuarios) {
-		System.out.println("------Usuarios Registrados:------");
+		//System.out.println("------Usuarios Registrados:------");
 		 for (Usuario usuario : usuarios) {
 			 System.out.println("Nombre: " + usuario.nombre + "\n" + " ID: " + usuario.idUnico + "\n"  + "Rol: " + usuario.rol);
 		 }
