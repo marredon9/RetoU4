@@ -1,5 +1,7 @@
 package retou4;
 
+import java.util.Scanner;
+
 public class Libro {
     private int id;
     private String titulo;
@@ -141,7 +143,25 @@ public class Libro {
         System.out.print(mensaje);
         return scanner.nextLine();
     }
+    public static int obtenerAño(Scanner scanner, String mensaje) {
+        int año;
+        while (true) {
+            System.out.print(mensaje);
+            if (scanner.hasNextInt()) {
+                año = scanner.nextInt(); 
+                scanner.nextLine(); 
 
-    
+                if (año >= 1) {
+                    return año;
+                } else {
+                    System.out.println("Error: El año debe ser mayor o igual a 1.");
+                }
+            } else {
+                System.out.println("Error: Debes ingresar un número. Inténtalo de nuevo.");
+                scanner.nextLine(); 
+            }
+        }
+    }
+
 
 }
