@@ -8,14 +8,6 @@ public class Prestamo {
 	String fechaInicio;
 	String fechaFinal; //Para comprobar si el préstamo ha finalizado, se comprobará si el valor de fechaFinal equivale a "".
 	static Prestamo[] prestamos = new Prestamo[64];
-/*
-		 private String idPrestamo;
-		    private Libro libro;
-		    private Usuario usuario;
-		    private LocalDate fechaPrestamo;
-		    private LocalDate fechaDevolucion;
-		    private boolean devuelto; 
-*/
 		
 	public Prestamo(int id, Libro libro, Usuario usuario, String fechaInicio) {
 	        this.id = id;
@@ -33,12 +25,13 @@ public class Prestamo {
 			{
 				prestamos[i] = new Prestamo(cont_ids, libro, usuario, fechaInicio);
 				cont_ids++;
-				return;
+				break;
 			}
 		}
+		libro.cantidad--;
 	}
 	
-	public void marcarDevolucion() {
+	void finalizarPrestmo(String fechaFinal) {
 	    /*if (!devuelto) {
 	        this.fechaDevolucion = LocalDate.now();
 	        this.devuelto = true;
@@ -46,6 +39,8 @@ public class Prestamo {
 	    } else {
 	        System.out.println("Este libro ya fue devuelto.");
 	    }*/
+		this.fechaFinal = fechaFinal;
+		this.libro.cantidad++;
 	}
 	
 	static void listarPrestamos()
@@ -58,6 +53,7 @@ public class Prestamo {
 		for (int i = 0; i < prestamos.length; i++)
 		{
 			if (prestamos[i] == null) return;
+			if (prestamos[i].fechaFinal.equals("")) continue; //si el prestamo ya ha finalizado, pasar al siguiente
 			System.out.println(prestamos[i].toString());
 		}
 	}
