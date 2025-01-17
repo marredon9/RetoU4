@@ -97,5 +97,17 @@ public class Libro {
             }
         }
     }
+    
+    public boolean añadirReserva(String nombreReserva) {
+        for (int i = 0; i < cantidad; i++) {
+            if (reservas[i] == null) {
+                reservas[i] = nombreReserva;
+                System.out.println("Reserva añadida para el libro: " + titulo);
+                return true;
+            }
+        }
+        System.out.println("No hay copias disponibles para reservar.");
+        return false;
+    }
 
 }
