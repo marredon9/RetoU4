@@ -35,7 +35,7 @@ public class Libro {
     
     int contarReservas()
     {
-    	return 0; //Provisional
+    	return Reserva.contarReservas(this);
     }
     
     boolean equals(Libro libro)
