@@ -59,4 +59,15 @@ public class Libro {
         }
         return count;
     }
+    
+    public static boolean registrarLibro(int id, String titulo, String autor, int añoPublicacion, int cantidad) {
+        if (cantidadLibros < libros.length) {
+            libros[cantidadLibros] = new Libro(id, titulo, autor, añoPublicacion, cantidad);
+            cantidadLibros++;
+            return true;
+        } else {
+            System.out.println("No hay espacio para más libros.");
+            return false;
+        }
+    }
 }
