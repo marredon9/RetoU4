@@ -115,26 +115,6 @@ public class Libro {
         return false;
     }
     
-    public static int obtenerNumero(Scanner scanner, String mensaje) {
-        int numero;
-        while (true) {
-            System.out.print(mensaje);
-            if (scanner.hasNextInt()) {
-                numero = scanner.nextInt(); 
-                scanner.nextLine(); 
-                return numero;
-            } else {
-                System.out.println("Error: Debes ingresar un número. Inténtalo de nuevo.");
-                scanner.nextLine(); 
-            }
-        }
-    }
-
-    public static String obtenerTexto(Scanner scanner, String mensaje) {
-        System.out.print(mensaje);
-        return scanner.nextLine();
-    }
-    
     public static int obtenerAño(Scanner scanner, String mensaje) {
         int año;
         while (true) {

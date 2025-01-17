@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         
-        int opcion;
+        /*int opcion;
         do {
             System.out.println("Seleccione una opción:");
             System.out.println("1. Registrar libro");
@@ -47,7 +47,9 @@ public class Principal {
 
         } while (opcion != 7);
 
-        scanner.close();
+        scanner.close();*/
+        
+        
     }
 
     private static void registrarLibro(Scanner scanner) {
@@ -109,6 +111,24 @@ public class Principal {
         } else {
             System.out.println("Libro no encontrado.");
         }
+    }
+    
+    static int getInt(Scanner sc, String prompt)
+    {
+    	while (true)
+    	{
+    		System.out.print(prompt);
+    		if(sc.hasNextInt())
+    		{
+    			break;
+    		}
+    		else
+    		{
+    			System.err.println("Error: Debe introducir un número entero.");
+    			sc.next();
+    		}
+    	}
+    	return sc.nextInt();
     }
 }
 
