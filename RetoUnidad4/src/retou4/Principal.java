@@ -10,20 +10,20 @@ public class Principal {
 		{	
 			int opcion = getInt(sc, "Introduzca la operación a realizar:\n"
 					+ "[0] Salir del programa.\n"
-					+ "[1] Modificar usuarios.\n"
-					+ "[2] Modificar libros.\n"
-					+ "[3] Modificar préstamos.\n"
-					+ "[4] Modificar reservas.\n");
+					+ "[1] Gestionar usuarios.\n"
+					+ "[2] Gestionar libros.\n"
+					+ "[3] Gestionar préstamos.\n"
+					+ "[4] Gestionar reservas.\n");
 			System.out.println();
 			switch (opcion)
 			{
 			case 0:
 				break;
 			case 1:
-				//OPERATIVA CON USUARIOS
+				//GESTIÓN DE USUARIOS
 				while (true)
 				{
-					int operacion = getInt(sc, "Introduzca la operación con usuarios a realizar:\n"
+					int operacion = getInt(sc, "Introduzca la gestión de usuarios a realizar:\n"
 							+ "[0] Volver.\n"
 							+ "[1] Registrar nuevo usuario.\n"
 							+ "[2] Listar usuarios existentes.\n");
@@ -70,18 +70,115 @@ public class Principal {
 						System.out.println();
 						operacion = 0;
 						break;
+					default:
+						//ERROR
+						System.out.println("La opción elegida no es válida.");
+						break;
 					}
 					if (operacion == 0) break;
 				}
 				break;
 			case 2:
-				//OPERATIVA CON LIBROS
+				//GESTIÓN DE LIBROS
+				while (true)
+				{
+					int operacion = getInt(sc, "Introduzca la gestión de libros a realizar:\n"
+							+ "[0] Volver.\n"
+							+ "[1] Registrar libro.\n"
+							+ "[2] Buscar libro.\n"
+							+ "[3] Ver libros disponibles.\n");
+					switch (operacion)
+					{
+					case 0:
+						break;
+					case 1:
+						//REGISTRAR LIBRO
+						System.out.print("Introduce el título del libro a registrar: ");
+						String titulo = sc.next();
+						sc.nextLine(); //Cosas del escáner.
+						System.out.print("Introduzca el autor del libro: ");
+						String autor = sc.next();
+						int año = obtenerAño(sc, "Introduzca el año de publicación del libro: ");
+						int copias = -1;
+						while (copias <= 0)
+						{
+							copias = getInt(sc, "Introduzca la cantidad de copias disponibles: ");
+						}
+						int nuevo_id = Libro.cont_ids;
+						Libro.registrarLibro(titulo, autor, año, copias);
+						System.out.println("Se ha registrado el nuevo libro con el ID " + nuevo_id);
+						operacion = 0;
+						break;
+					case 2:
+						//BUSCAR LIBRO
+						while (true)
+						{
+							int busqueda = getInt(sc, "Introduzca el tipo de búsqueda a realizar: "
+									+ "[0] Volver.\n"
+									+ "[1] Búsqueda por ID.\n"
+									+ "[2] Búsqueda por título.\n");
+							int id_busqueda;
+							String titulo_busqueda;
+							Libro resultado;
+							switch (busqueda)
+							{
+							case 0:
+								break;
+							case 1:
+								//BÚSQUEDA POR ID
+								id_busqueda = getInt(sc, "Introduzca el ID a buscar: ");
+								resultado = Libro.consultarLibroPorId(id_busqueda);
+								if (resultado == null)
+								{
+									System.out.println("No hay resultados para la búsqueda.");
+								}
+								else
+								{
+									System.out.println("El resultado de la búsqueda es el siguiente:");
+									System.out.println(resultado.toString());
+								}
+								busqueda = 0;
+								break;
+							case 2:
+								//BÚSQUEDA POR TÍTULO
+								titulo_busqueda = sc.next();
+								resultado = Libro.consultarLibroPorTitulo(titulo_busqueda);
+								if (resultado == null)
+								{
+									System.out.println("No hay resultados para la búsqueda.");
+								}
+								else
+								{
+									System.out.println("El resultado de la búsqueda es el siguiente:");
+									System.out.println(resultado.toString());
+								}
+								busqueda = 0;
+								break;
+							default:
+								System.out.println("La opción elegida no es válida.");
+								break;
+							}
+							if (busqueda == 0) break;
+						}
+						break;
+					case 3:
+						//LISTAR LIBROS
+						System.out.println("Libros disponibles:");
+						Libro.mostrarLibros();
+						break;
+					default:
+						//ERROR
+						System.out.println("La opción elegida no es válida.");
+						break;
+					}
+					if (operacion == 0) break;
+				}
 				break;
 			case 3:
-				//OPERATIVA CON PRÉSTAMOS
+				//GESTIÓN DE PRÉSTAMOS
 				break;
 			case 4:
-				//OPERATIVA CON RESERVAS
+				//GESTIÓN DE RESERVAS
 				break;
 			default:
 				System.out.println("Error: La opción elegida no es válida.");
@@ -173,6 +270,7 @@ public class Principal {
     
     static int getInt(Scanner sc, String prompt, String error)
     {
+    	sc.nextLine();
     	while (true)
     	{
     		System.out.print(prompt);
@@ -196,6 +294,7 @@ public class Principal {
     	do
     	{
     		in = getInt(sc, prompt, error);
+    		if (in < 0) System.err.println(error);
     	} while (in < 0);
     	return in;
     }
