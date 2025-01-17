@@ -72,6 +72,7 @@ public class Libro {
             return false;
         }
     }
+    
     public static Libro consultarLibroPorId(int id) {
         for (int i = 0; i < cantidadLibros; i++) {
             if (libros[i].getId() == id) {
@@ -143,6 +144,7 @@ public class Libro {
         System.out.print(mensaje);
         return scanner.nextLine();
     }
+    
     public static int obtenerAño(Scanner scanner, String mensaje) {
         int año;
         while (true) {
