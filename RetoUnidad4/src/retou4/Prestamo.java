@@ -42,16 +42,3 @@ public class Prestamo {
 	        return fechaDevolucion;
 	    }
 
-
-	    public void marcarDevolucion() {
-	        if (!devuelto) {
-	            this.fechaDevolucion = LocalDate.now();
-	            this.devuelto = true;
-	            System.out.println("El libro ha sido devuelto.");
-	        } else {
-	            System.out.println("Este libro ya fue devuelto.");
-	        }
-	    }
-
-
-	}
