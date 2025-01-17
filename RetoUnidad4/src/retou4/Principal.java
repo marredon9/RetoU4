@@ -8,3 +8,6 @@ public class SistemaBiblioteca {
 
         biblioteca.agregarUsuario(new Usuario("U1", "Juan", "Estudiante"));
         biblioteca.agregarUsuario(new Usuario("U2", "María", "Profesor"));
+
+        biblioteca.realizarPrestamo("P1", "1", "U1");
+        biblioteca.realizarPrestamo("P2", "2", "U1");
