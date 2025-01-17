@@ -5,6 +5,10 @@ debe realizarse en grupos de 4 personas, distribuyendo las responsabilidades de 
 clase entre los miembros del equipo y colaborando mediante Git en Eclipse para integrar
 el proyecto.
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 49955a5b0c58a797b3a683e239fa467467987f3e
    Requisitos de uso de Git:
 1. Cada miembro debe crear y trabajar en su propia rama de Git.
 2. Los commits deben ser frecuentes, con mensajes claros y específicos.
