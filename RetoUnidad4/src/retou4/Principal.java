@@ -5,6 +5,15 @@ import java.util.Scanner;
 public class Principal {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		Libro.registrarLibro("El Lenguaje de Programación C", "Dennis Ritchie", 1798, 10);
+		Libro.registrarLibro("Asi es la Puta Vida", "Jordi Wild", 2022, 5);
+		Libro.registrarLibro("Neon Genesis Evangelion 4", "Yoshiyuki Sadamoto", 2022, 1);
+		
+		Usuario.registrarUsuario("Unax", "Invitado");
+		Usuario.registrarUsuario("Borja", "Profesor");
+		Usuario.registrarUsuario("Marina", "Estudiante");
+		Usuario.registrarUsuario("Oier", "Estudiante");
+		
 		
 		while (true)
 		{	
@@ -176,9 +185,107 @@ public class Principal {
 				break;
 			case 3:
 				//GESTIÓN DE PRÉSTAMOS
+				while (true)
+				{
+					System.out.println();
+					int operacion = getInt(sc, "Introduce la gestión de préstamos a realizar:\n"
+							+ "[0] Volver.\n"
+							+ "[1] Iniciar préstamo.\n"
+							+ "[2] Finalizar préstamo.\n");
+					switch (operacion)
+					{
+					case 0:
+						break;
+					case 1:
+						//REALIZAR PRÉSTAMO
+						Libro prestado;
+						Usuario usuario = null;
+						while (true)
+						{
+							Libro.mostrarLibros();
+							int id_libro = getInt(sc, "Introduce el ID del libro a tomar prestado: ");
+							prestado = Libro.consultarLibroPorId(id_libro);
+							if (prestado == null)
+							{
+								System.out.println("No existe ningún libro con ese ID.");
+							}
+							else
+							{
+								if (prestado.cantidad == 0) System.out.println("No hay unidades disponibles de ese libro.");
+								break;
+							}
+						}
+						if (prestado.cantidad == 0) break;
+						while (true)
+						{
+							Usuario.listarUsuario();
+							int id_usuario = getInt(sc, "Introduce el ID del usuario que va a tomar prestado el libro: ");
+							//buscar usuario
+							for (int i = 0; i < Usuario.usuarios.length; i++)
+							{
+								if (Usuario.usuarios[i] == null) break;
+								if (id_usuario == Usuario.usuarios[i].idUnico)
+								{
+									usuario = Usuario.usuarios[i];
+								}
+							}
+							if (usuario == null)
+							{
+								System.out.println("No existe ningún usuario con ese ID.");
+							}
+							else
+							{
+								if (!usuario.verificarPrestamo()) System.out.println("El usuario no tiene préstamos disponibles.");
+								break;
+							}
+						}
+						if (!usuario.verificarPrestamo()) break;
+						System.out.print("Introduzca la fecha de inicio del préstamo: ");
+						String fecha = sc.next();
+						int id_prestamo = Prestamo.cont_ids;
+						Prestamo.iniciarPrestamo(prestado, usuario, fecha);
+						System.out.println("Se ha iniciado un préstamo con el ID " + id_prestamo);
+						break;
+					case 2:
+						//FINALIZAR PRÉSTAMO
+						int prestamo;
+						while (true)
+						{
+							Prestamo.listarPrestamos();
+							prestamo = getInt(sc, "Introduce el ID del prestamo a finalizar: ");
+							Prestamo finalizar_prestamo = null;
+							//Buscar préstamo por ID
+							for (int i = 0; i < Prestamo.prestamos.length; i++)
+							{
+								if (Prestamo.prestamos[i] == null) break;
+								if (Prestamo.prestamos[i].id == prestamo)
+								{
+									finalizar_prestamo = Prestamo.prestamos[i];
+									break;
+								}
+							}
+							if (finalizar_prestamo == null)
+							{
+								System.out.println("No se ha encontrado ningún préstamo con ese ID.");
+								break;
+							}
+							System.out.print("Introduce la fecha del fin del préstamo: ");
+							String fecha_fin = sc.next();
+							finalizar_prestamo.finalizarPrestamo(fecha_fin);
+							System.out.println("Se ha finalizado el préstamo.");
+						}
+						break;
+					default:
+						//ERROR
+						System.out.println("La opción elegida no es válida.");
+						break;
+					}
+					if (operacion == 0) break;
+				}
 				break;
 			case 4:
 				//GESTIÓN DE RESERVAS
+				while (true)
 				break;
 			default:
 				System.out.println("Error: La opción elegida no es válida.");

@@ -16,7 +16,7 @@ public class Prestamo {
 	        this.fechaInicio = fechaInicio;
 	}
 	
-	void iniciarPrestamo(Libro libro, Usuario usuario, String fechaInicio)
+	static void iniciarPrestamo(Libro libro, Usuario usuario, String fechaInicio)
 	{
 		if (prestamos[prestamos.length - 1] != null) return;
 		for (int i = 0; i < prestamos.length; i++)
@@ -24,6 +24,14 @@ public class Prestamo {
 			if (prestamos[i] == null)
 			{
 				prestamos[i] = new Prestamo(cont_ids, libro, usuario, fechaInicio);
+				//añadir prestamo a lista de prestamos de usuario
+				for (int j = 0; j < usuario.librosPrestados.length; j++)
+				{
+					if (usuario.librosPrestados[j] == null)
+					{
+						usuario.librosPrestados[j] = prestamos[i];
+					}
+				}
 				cont_ids++;
 				break;
 			}
@@ -52,8 +60,8 @@ public class Prestamo {
 		}
 		for (int i = 0; i < prestamos.length; i++)
 		{
-			if (prestamos[i] == null) return;
-			if (prestamos[i].fechaFinal.equals("")) continue; //si el prestamo ya ha finalizado, pasar al siguiente
+			if (prestamos[i] == null) continue;
+			if (prestamos[i].fechaFinal == null) continue; //si el prestamo ya ha finalizado, pasar al siguiente
 			System.out.println(prestamos[i].toString());
 		}
 	}

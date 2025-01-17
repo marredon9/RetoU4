@@ -76,7 +76,12 @@ public class Usuario {
 		}
 	}
 	
-	public boolean verificarPrestamo() {
-		return (this.librosPrestados[this.librosPrestados.length - 1] != null);
+	public boolean verificarPrestamo() { //devuelve si el usuario puede hacer un prestamo
+		int total = 0;
+		for (int i = 0; i < this.librosPrestados.length; i++)
+		{
+			if (this.librosPrestados[i] == null) total++;
+		}
+		return (total > 0);
 	}
 }
