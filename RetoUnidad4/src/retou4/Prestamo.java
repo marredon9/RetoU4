@@ -13,7 +13,6 @@ public Prestamo(String idPrestamo, Libro libro, Usuario usuario, LocalDate fecha
         this.usuario = usuario;
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
-        this.libro.setDisponible(false);
     }
 }
 
