@@ -1,55 +1,75 @@
 package retou4;
-import java.time.LocalDate;
 
 public class Prestamo {
-
-
-		 private String idPrestamo;
-		    private Libro libro;
-		    private Usuario usuario;
-		    private LocalDate fechaPrestamo;
-		    private LocalDate fechaDevolucion;
-		    private boolean devuelto; 
-
+	static int cont_ids = 1;
+	int id; //Identificador del préstamo.
+	Libro libro;
+	Usuario usuario;
+	String fechaInicio;
+	String fechaFinal; //Para comprobar si el préstamo ha finalizado, se comprobará si el valor de fechaFinal equivale a "".
+	static Prestamo[] prestamos = new Prestamo[64];
 		
-	public Prestamo(String idPrestamo, Libro libro, Usuario usuario, LocalDate fechaPrestamo, LocalDate fechaDevolucion) {
-	        this.idPrestamo = idPrestamo;
+	public Prestamo(int id, Libro libro, Usuario usuario, String fechaInicio) {
+	        this.id = id;
 	        this.libro = libro;
 	        this.usuario = usuario;
-	        this.fechaPrestamo = fechaPrestamo;
-	        this.fechaDevolucion = fechaDevolucion;
-	        this.devuelto = false;
-	    }
-	
-
-	public String getIdPrestamo() {
-	        return idPrestamo;
-	    }
-
-	    public Libro getLibro() {
-	        return libro;
-	    }
-
-	    public Usuario getUsuario() {
-	        return usuario;
-	    }
-
-	    public LocalDate getFechaPrestamo() {
-	        return fechaPrestamo;
-	    }
-
-	    public LocalDate getFechaDevolucion() {
-	        return fechaDevolucion;
-	    }
-	    public void marcarDevolucion() {
-	        if (!devuelto) {
-	            this.fechaDevolucion = LocalDate.now();
-	            this.devuelto = true;
-	            System.out.println("El libro ha sido devuelto.");
-	        } else {
-	            System.out.println("Este libro ya fue devuelto.");
-	        }
-	    }
-
-
+	        this.fechaInicio = fechaInicio;
 	}
+	
+	static void iniciarPrestamo(Libro libro, Usuario usuario, String fechaInicio)
+	{
+		if (prestamos[prestamos.length - 1] != null) return;
+		for (int i = 0; i < prestamos.length; i++)
+		{
+			if (prestamos[i] == null)
+			{
+				prestamos[i] = new Prestamo(cont_ids, libro, usuario, fechaInicio);
+				//añadir prestamo a lista de prestamos de usuario
+				for (int j = 0; j < usuario.librosPrestados.length; j++)
+				{
+					if (usuario.librosPrestados[j] == null)
+					{
+						usuario.librosPrestados[j] = prestamos[i];
+					}
+				}
+				cont_ids++;
+				break;
+			}
+		}
+		libro.cantidad--;
+	}
+	
+	void finalizarPrestamo(String fechaFinal) {
+	    /*if (!devuelto) {
+	        this.fechaDevolucion = LocalDate.now();
+	        this.devuelto = true;
+	        System.out.println("El libro ha sido devuelto.");
+	    } else {
+	        System.out.println("Este libro ya fue devuelto.");
+	    }*/
+		this.fechaFinal = fechaFinal;
+		this.libro.cantidad++;
+	}
+	
+	static void listarPrestamos()
+	{
+		if (prestamos[0] == null)
+		{
+			System.out.println("Actualmente no hay prestamos activos.");
+			return;
+		}
+		for (int i = 0; i < prestamos.length; i++)
+		{
+			if (prestamos[i] == null) continue;
+			if (prestamos[i].fechaFinal == null) continue; //si el prestamo ya ha finalizado, pasar al siguiente
+			System.out.println(prestamos[i].toString());
+		}
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "ID: " + this.id + " Título del libro: " + this.libro.titulo + " Usuario: " + this.usuario.nombre + " Fecha de inicio: " + this.fechaInicio
+				+ " Fecha de finalización: " + (this.fechaFinal.equals("") ? "Todavía vigente." : this.fechaFinal);
+	}
+}
