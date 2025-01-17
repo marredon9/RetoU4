@@ -1,165 +1,115 @@
 package retou4;
 
 import java.util.Scanner;
-public class Libro {
-    private int id;
-    private String titulo;
-    private String autor;
-    private int añoPublicacion;
-    private int cantidad;
-    private String[] reservas; 
-    private static Libro[] libros = new Libro[10]; 
-    private static int cantidadLibros = 0; 
 
-    // Constructor
-    public Libro(int id, String titulo, String autor, int añoPublicacion, int cantidad) {
-        this.id = id;
-        this.titulo = titulo;
-        this.autor = autor;
-        this.añoPublicacion = añoPublicacion;
-        this.cantidad = cantidad;
-        this.reservas = new String[cantidad];  
-    }
+public class main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int opcion;
+        do {
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Registrar libro");
+            System.out.println("2. Consultar libro por ID");
+            System.out.println("3. Consultar libro por título");
+            System.out.println("4. Listar todos los libros");
+            System.out.println("5. Añadir reserva");
+            System.out.println("6. Eliminar reserva");
+            System.out.println("7. Salir");
 
-    public int getId() {
-        return id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public int getAñoPublicacion() {
-        return añoPublicacion;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public String[] getReservas() {
-        return reservas;
-    }
-
-    @Override
-    public String toString() {
-        return "ID: " + id + ", Título: " + titulo + ", Autor: " + autor + ", Año: " + añoPublicacion + ", Cantidad: " + cantidad + ", Reservas: " + getCantidadReservas();
-    }
-
-    public int getCantidadReservas() {
-        int count = 0;
-        for (String reserva : reservas) {
-            if (reserva != null) {
-                count++;
+            opcion = Libro.obtenerNumero(scanner, "Ingrese el número de la opción: ");
+            
+            switch (opcion) {
+                case 1:
+                    registrarLibro(scanner);
+                    break;
+                case 2:
+                    consultarLibroPorId(scanner);
+                    break;
+                case 3:
+                    consultarLibroPorTitulo(scanner);
+                    break;
+                case 4:
+                    Libro.mostrarLibros();
+                    break;
+                case 5:
+                    añadirReserva(scanner);
+                    break;
+                case 6:
+                    eliminarReserva(scanner);
+                    break;
+                case 7:
+                    System.out.println("¡Hasta luego!");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
             }
-        }
-        return count;
+
+        } while (opcion != 7);
+
+        scanner.close();
     }
 
-    public static boolean registrarLibro(int id, String titulo, String autor, int añoPublicacion, int cantidad) {
-        if (cantidadLibros < libros.length) {
-            libros[cantidadLibros] = new Libro(id, titulo, autor, añoPublicacion, cantidad);
-            cantidadLibros++;
-            return true;
+    private static void registrarLibro(Scanner scanner) {
+        int id = Libro.obtenerNumero(scanner, "Ingrese el ID del libro: ");
+        String titulo = Libro.obtenerTexto(scanner, "Ingrese el título del libro: ");
+        String autor = Libro.obtenerTexto(scanner, "Ingrese el autor del libro: ");
+        
+        int año = Libro.obtenerAño(scanner, "Ingrese el año de publicación: ");
+        
+        int cantidad = Libro.obtenerNumero(scanner, "Ingrese la cantidad de copias disponibles: ");
+
+        if (Libro.registrarLibro(id, titulo, autor, año, cantidad)) {
+            System.out.println("Libro registrado con éxito.");
+        }
+    }
+
+
+    private static void consultarLibroPorId(Scanner scanner) {
+        int id = Libro.obtenerNumero(scanner, "Ingrese el ID del libro a consultar: ");
+        Libro libro = Libro.consultarLibroPorId(id);
+        if (libro != null) {
+            System.out.println(libro);
         } else {
-            System.out.println("No hay espacio para más libros.");
-            return false;
+            System.out.println("Libro no encontrado.");
         }
     }
 
-    public static Libro consultarLibroPorId(int id) {
-        for (int i = 0; i < cantidadLibros; i++) {
-            if (libros[i].getId() == id) {
-                return libros[i];
-            }
-        }
-        return null; 
-    }
-
-    public static Libro consultarLibroPorTitulo(String titulo) {
-        for (int i = 0; i < cantidadLibros; i++) {
-            if (libros[i].getTitulo().equalsIgnoreCase(titulo)) {
-                return libros[i];
-            }
-        }
-        return null; 
-    }
-
-    public static void mostrarLibros() {
-        if (cantidadLibros == 0) {
-            System.out.println("No hay libros registrados.");
+    private static void consultarLibroPorTitulo(Scanner scanner) {
+        String titulo = Libro.obtenerTexto(scanner, "Ingrese el título del libro a consultar: ");
+        Libro libro = Libro.consultarLibroPorTitulo(titulo);
+        if (libro != null) {
+            System.out.println(libro);
         } else {
-            for (int i = 0; i < cantidadLibros; i++) {
-                System.out.println(libros[i]);
-            }
+            System.out.println("Libro no encontrado.");
         }
     }
 
-    public boolean añadirReserva(String nombreReserva) {
-        for (int i = 0; i < cantidad; i++) {
-            if (reservas[i] == null) {
-                reservas[i] = nombreReserva;
-                System.out.println("Reserva añadida para el libro: " + titulo);
-                return true;
+    private static void añadirReserva(Scanner scanner) {
+        int id = Libro.obtenerNumero(scanner, "Ingrese el ID del libro para hacer la reserva: ");
+        Libro libro = Libro.consultarLibroPorId(id);
+        if (libro != null) {
+            String nombreReserva = Libro.obtenerTexto(scanner, "Ingrese el nombre para la reserva: ");
+            if (libro.añadirReserva(nombreReserva)) {
+                System.out.println("Reserva añadida correctamente.");
             }
-        }
-        System.out.println("No hay copias disponibles para reservar.");
-        return false;
-    }
-
-    public boolean eliminarReserva(String nombreReserva) {
-        for (int i = 0; i < cantidad; i++) {
-            if (reservas[i] != null && reservas[i].equalsIgnoreCase(nombreReserva)) {
-                reservas[i] = null;
-                System.out.println("Reserva eliminada para el libro: " + titulo);
-                return true;
-            }
-        }
-        System.out.println("No se encontró la reserva para el libro: " + titulo);
-        return false;
-    }
-
-    public static int obtenerNumero(java.util.Scanner scanner, String mensaje) {
-        int numero;
-        while (true) {
-            System.out.print(mensaje);
-            if (scanner.hasNextInt()) {
-                numero = scanner.nextInt(); 
-                scanner.nextLine(); 
-                return numero;
-            } else {
-                System.out.println("Error: Debes ingresar un número. Inténtalo de nuevo.");
-                scanner.nextLine(); 
-            }
+        } else {
+            System.out.println("Libro no encontrado.");
         }
     }
 
-    public static String obtenerTexto(java.util.Scanner scanner, String mensaje) {
-        System.out.print(mensaje);
-        return scanner.nextLine();
-    }
-    public static int obtenerAño(Scanner scanner, String mensaje) {
-        int año;
-        while (true) {
-            System.out.print(mensaje);
-            if (scanner.hasNextInt()) {
-                año = scanner.nextInt(); 
-                scanner.nextLine(); 
-
-                if (año >= 1) {
-                    return año;
-                } else {
-                    System.out.println("Error: El año debe ser mayor o igual a 1.");
-                }
-            } else {
-                System.out.println("Error: Debes ingresar un número. Inténtalo de nuevo.");
-                scanner.nextLine(); 
+    private static void eliminarReserva(Scanner scanner) {
+        int id = Libro.obtenerNumero(scanner, "Ingrese el ID del libro para eliminar la reserva: ");
+        Libro libro = Libro.consultarLibroPorId(id);
+        if (libro != null) {
+            String nombreReserva = Libro.obtenerTexto(scanner, "Ingrese el nombre de la reserva a eliminar: ");
+            if (libro.eliminarReserva(nombreReserva)) {
+                System.out.println("Reserva eliminada correctamente.");
             }
+        } else {
+            System.out.println("Libro no encontrado.");
         }
     }
-
 }
+
+
