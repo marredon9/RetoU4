@@ -1,13 +1,14 @@
 package retou4;
 
 public class Libro {
-    int id;
+    static int cont_ids = 0;
+	int id;
     String titulo;
     String autor;
     int añoPublicacion;
     //String[] reservas; 
     int cantidad;
-    static Libro[] libros = new Libro[10]; 
+    static Libro[] libros = new Libro[32]; 
     //static int cantidadLibros = 0; 
 
     // Constructor
@@ -46,10 +47,11 @@ public class Libro {
         return "ID: " + this.id + ", Título: " + this.titulo + ", Autor: " + this.autor + ", Año: " + this.añoPublicacion + ", Cantidad: " + cantidad + ", Reservas: " + this.contarReservas();
     }
     
-    public static boolean registrarLibro(int id, String titulo, String autor, int añoPublicacion, int cantidad) {
+    public static boolean registrarLibro(String titulo, String autor, int añoPublicacion, int cantidad) {
         int cantidadLibros = Libro.contarLibros();
     	if (cantidadLibros < libros.length) {
-            libros[cantidadLibros] = new Libro(id, titulo, autor, añoPublicacion, cantidad);
+            libros[cantidadLibros] = new Libro(cont_ids, titulo, autor, añoPublicacion, cantidad);
+            cont_ids++;
             return true;
         } else {
             System.out.println("No hay espacio para más libros.");
