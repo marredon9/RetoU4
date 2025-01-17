@@ -87,5 +87,15 @@ public class Libro {
         }
         return null; 
     }
+    
+    public static void mostrarLibros() {
+        if (cantidadLibros == 0) {
+            System.out.println("No hay libros registrados.");
+        } else {
+            for (int i = 0; i < cantidadLibros; i++) {
+                System.out.println(libros[i]);
+            }
+        }
+    }
 
 }
