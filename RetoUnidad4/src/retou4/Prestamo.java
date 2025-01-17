@@ -36,8 +36,4 @@ public String getIdPrestamo() {
         return fechaDevolucion;
     }
 
-
-    public void marcarDevolucion() {
-        this.libro.setDisponible(true);
-    }
 }
