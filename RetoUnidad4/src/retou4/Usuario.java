@@ -57,17 +57,23 @@ public class Usuario {
 	
 	public static void listarUsuario() {
 		//System.out.println("------Usuarios Registrados:------");
-		 for (int i = 0; i < usuarios.length; i++)
-		 {
-			 if (usuarios[i] == null) return;
-			 //contar prestamos disponibles
-			 int prestamosDisponibles = 0;
-			 for (int j = 0; j < usuarios[i].librosPrestados.length; j++)
-			 {
-				 if (usuarios[i].librosPrestados[j] == null) prestamosDisponibles++;
-			 }
-			 System.out.println("Nombre: " + usuarios[i].nombre + ", ID: " + usuarios[i].idUnico + ", Rol: " + usuarios[i].rol + ", Préstamos disponibles: " + prestamosDisponibles);
-		 }
+		if (usuarios[0] == null)
+		{
+			System.out.println("Actualmente no existe ningún usuario registrado.");
+			return;
+		}
+		
+		for (int i = 0; i < usuarios.length; i++)
+		{
+			if (usuarios[i] == null) return;
+			//contar prestamos disponibles
+			int prestamosDisponibles = 0;
+			for (int j = 0; j < usuarios[i].librosPrestados.length; j++)
+			{
+				if (usuarios[i].librosPrestados[j] == null) prestamosDisponibles++;
+			}
+			System.out.println("Nombre: " + usuarios[i].nombre + ", ID: " + usuarios[i].idUnico + ", Rol: " + usuarios[i].rol + ", Préstamos disponibles: " + prestamosDisponibles);
+		}
 	}
 	
 	public boolean verificarPrestamo() {
