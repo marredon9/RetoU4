@@ -1,55 +1,36 @@
 package retou4;
-import java.time.LocalDate;
 
 public class Prestamo {
-
-
+	static int cont_ids = 1;
+	int id; //Identificador del préstamo.
+	Libro libro;
+	Usuario usuario;
+	String fechaInicio;
+	String fechaFinal; //Para comprobar si el préstamo ha finalizado, se comprobará si el valor de fechaFinal equivale a "".
+	
+/*
 		 private String idPrestamo;
 		    private Libro libro;
 		    private Usuario usuario;
 		    private LocalDate fechaPrestamo;
 		    private LocalDate fechaDevolucion;
 		    private boolean devuelto; 
-
+*/
 		
-	public Prestamo(String idPrestamo, Libro libro, Usuario usuario, LocalDate fechaPrestamo, LocalDate fechaDevolucion) {
-	        this.idPrestamo = idPrestamo;
+	public Prestamo(int id, Libro libro, Usuario usuario, String fechaInicio) {
+	        this.id = id;
 	        this.libro = libro;
 	        this.usuario = usuario;
-	        this.fechaPrestamo = fechaPrestamo;
-	        this.fechaDevolucion = fechaDevolucion;
-	        this.devuelto = false;
-	    }
+	        this.fechaInicio = fechaInicio;
+	}
 	
-
-	public String getIdPrestamo() {
-	        return idPrestamo;
-	    }
-
-	    public Libro getLibro() {
-	        return libro;
-	    }
-
-	    public Usuario getUsuario() {
-	        return usuario;
-	    }
-
-	    public LocalDate getFechaPrestamo() {
-	        return fechaPrestamo;
-	    }
-
-	    public LocalDate getFechaDevolucion() {
-	        return fechaDevolucion;
-	    }
 	    public void marcarDevolucion() {
-	        if (!devuelto) {
+	        /*if (!devuelto) {
 	            this.fechaDevolucion = LocalDate.now();
 	            this.devuelto = true;
 	            System.out.println("El libro ha sido devuelto.");
 	        } else {
 	            System.out.println("Este libro ya fue devuelto.");
-	        }
+	        }*/
 	    }
-
-
-	}
+}

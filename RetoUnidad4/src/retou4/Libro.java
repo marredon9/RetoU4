@@ -70,7 +70,7 @@ public class Libro {
     public static Libro consultarLibroPorTitulo(String titulo) {
     	int cantidadLibros = Libro.contarLibros();
     	for (int i = 0; i < cantidadLibros; i++) {
-            if (libros[i].titulo.toLowerCase().contains(titulo.toLowerCase())) {
+            if (libros[i].titulo.toLowerCase().equals(titulo.toLowerCase())) {
                 return libros[i];
             }
         }
