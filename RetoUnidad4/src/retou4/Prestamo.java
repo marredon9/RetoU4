@@ -36,3 +36,9 @@ public String getIdPrestamo() {
     public LocalDate getFechaDevolucion() {
         return fechaDevolucion;
     }
+
+
+    public void marcarDevolucion() {
+        this.libro.setDisponible(true);
+    }
+}
