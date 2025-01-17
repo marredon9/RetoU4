@@ -1,10 +1,4 @@
 package retou4;
-
-public class Principal {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("ª");
-	}
-
-}
+public class SistemaBiblioteca {
+    public static void main(String[] args) {
+        Biblioteca biblioteca = new Biblioteca();
