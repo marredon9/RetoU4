@@ -3,14 +3,14 @@ package retou4;
 import java.util.Scanner;
 
 public class Libro {
-    private int id;
-    private String titulo;
-    private String autor;
-    private int añoPublicacion;
-    private String[] reservas; 
-    private int cantidad;
-    private static Libro[] libros = new Libro[10]; 
-    private static int cantidadLibros = 0; 
+    int id;
+    String titulo;
+    String autor;
+    int añoPublicacion;
+    String[] reservas; 
+    int cantidad;
+    static Libro[] libros = new Libro[10]; 
+    static int cantidadLibros = 0; 
 
     // Constructor
     public Libro(int id, String titulo, String autor, int añoPublicacion, int cantidad) {
