@@ -114,26 +114,4 @@ public class Libro {
         System.out.println("No se encontró la reserva para el libro: " + titulo);
         return false;
     }
-    
-    public static int obtenerAño(Scanner scanner, String mensaje) {
-        int año;
-        while (true) {
-            System.out.print(mensaje);
-            if (scanner.hasNextInt()) {
-                año = scanner.nextInt(); 
-                scanner.nextLine(); 
-
-                if (año >= 1) {
-                    return año;
-                } else {
-                    System.out.println("Error: El año debe ser mayor o igual a 1.");
-                }
-            } else {
-                System.out.println("Error: Debes ingresar un número. Inténtalo de nuevo.");
-                scanner.nextLine(); 
-            }
-        }
-    }
-
-
 }

@@ -130,6 +130,35 @@ public class Principal {
     	}
     	return sc.nextInt();
     }
+    
+    static int getInt(Scanner sc, String prompt, String error)
+    {
+    	while (true)
+    	{
+    		System.out.print(prompt);
+    		if(sc.hasNextInt())
+    		{
+    			break;
+    		}
+    		else
+    		{
+    			System.err.println(error);
+    			sc.next();
+    		}
+    	}
+    	return sc.nextInt();
+    }
+    
+    static int obtenerAño(Scanner sc, String prompt)
+    {
+    	String error = "Error: Debes introducir un número superior a 0.";
+    	int in;
+    	do
+    	{
+    		in = getInt(sc, prompt, error);
+    	} while (in < 0);
+    	return in;
+    }
 }
 
 
