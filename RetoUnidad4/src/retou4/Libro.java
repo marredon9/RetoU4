@@ -109,5 +109,17 @@ public class Libro {
         System.out.println("No hay copias disponibles para reservar.");
         return false;
     }
+    
+    public boolean eliminarReserva(String nombreReserva) {
+        for (int i = 0; i < cantidad; i++) {
+            if (reservas[i] != null && reservas[i].equalsIgnoreCase(nombreReserva)) {
+                reservas[i] = null;
+                System.out.println("Reserva eliminada para el libro: " + titulo);
+                return true;
+            }
+        }
+        System.out.println("No se encontró la reserva para el libro: " + titulo);
+        return false;
+    }
 
 }
